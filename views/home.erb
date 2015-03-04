@@ -40,7 +40,7 @@ Do it like this:
         <br /> <br />
         
 
-
+        <button id="submit" onclick="saveContent()">Save</button>
         <script type="text/javascript">
             (function () {
                 var converter1 = Markdown.getSanitizingConverter();
@@ -58,8 +58,24 @@ Do it like this:
                 ace1.setValue(text1, -1);
                 editor1.run(ace1);
                 
-                
+                console.log(ace1.getValue());
+
             })();
+            function saveContent() {
+                var ace1 = ace.edit("wmd-input");
+                var text = ace1.getValue();
+                alert(text);
+                var blob = new Blob([text], {type: 'text/plain'});
+                var downloadLink = document.createElement("a");
+                downloadLink.download = "testfile";
+                downloadLink.innerHTML = "Download File";
+                if (window.webkitURL != null) {
+                    // Chrome allows the link to be clicked
+                    // without actually adding it to the DOM.
+                    downloadLink.href = window.webkitURL.createObjectURL(blob);
+                }
+                downloadLink.click();
+            }
         </script>
     </body>
 </html>
