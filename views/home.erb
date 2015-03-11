@@ -19,52 +19,31 @@
             <div class="wmd-input" id="wmd-input"></div>
         </div>
         <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
-        <br />
-        <br />
-        <button id="submit" class="btn btn-default" onclick="saveContent()">Save</button>
+        <br/>
+        <br/>
         <script type="text/javascript">
-            (function () {
-                var converter1 = Markdown.getSanitizingConverter();
-                
-                converter1.hooks.chain("preBlockGamut", function (text, rbg) {
-                    return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
-                        return "<blockquote>" + rbg(inner) + "</blockquote>\n";
-                    });
-                });
-                
-                var editor1 = new Markdown.Editor(converter1);
-                
-                var text1 = document.getElementById('wmd-input').innerHTML;
-                var ace1 = ace.edit("wmd-input");
-                ace1.setValue(text1, -1);
-                editor1.run(ace1);
-            })();
+            var converter1 = Markdown.getSanitizingConverter();
             
-            // function saveContent() {
-            //     var ace1 = ace.edit("wmd-input");
-            //     var text = ace1.getValue();
-            //     var blob = new Blob([text], {type: 'text/plain'});
-            //     var downloadLink = document.createElement("a");
-            //     downloadLink.download = "testfile";
-            //     downloadLink.innerHTML = "Download File";
-            //     if (window.webkitURL != null) {
-            //         // Chrome allows the link to be clicked
-            //         // without actually adding it to the DOM.
-            //         downloadLink.href = window.webkitURL.createObjectURL(blob);
-            //     } else {
-            //         // Firefox requires the link to be added to the DOM
-            //         // before it can be clicked.
-            //         downloadLink.href = window.URL.createObjectURL(blob);
-            //         downloadLink.onclick = destroyClickedElement;
-            //         downloadLink.style.display = "none";
-            //         document.body.appendChild(downloadLink);
-            //     }
-            //     downloadLink.click();
-            // }
-            // function destroyClickedElement(event) {
-            //     document.body.removeChild(event.target);
-            // }
-            function saveContent() {
+            converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+                return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
+                    return "<blockquote>" + rbg(inner) + "</blockquote>\n";
+                });
+            });
+            
+            var editor1 = new Markdown.Editor(converter1);
+            
+            var text1 = document.getElementById('wmd-input').innerHTML;
+            var ace1 = ace.edit("wmd-input");
+            ace1.setValue(text1, -1);
+            editor1.run(ace1);
+
+            var session1 = ace1.getSession();
+            var preview = document.getElementById("wmd-preview");
+            session1.on("changeScrollTop", function() {
+                preview.scrollTop = session1.getScrollTop();
+            });
+
+            window.setInterval(function() {
                 var xmlhttp;
                 if ( window.XMLHttpRequest ) {
                     // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -77,8 +56,7 @@
                 var text = ace1.getValue();
                 xmlhttp.open("POST","/api/v1/save" ,true);
                 xmlhttp.send(text);
-            }
-            
+            }, 30000);
         </script>
     </div>
     </body>
