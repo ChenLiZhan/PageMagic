@@ -11,7 +11,7 @@
         <script type="text/javascript" src="/Markdown.Editor.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/ace/1.1.01/ace.js" type="text/javascript" charset="utf-8"></script>
     </head>
-    
+
     <body>
     <div class="container">
         <div class="wmd-panel">
@@ -22,27 +22,30 @@
         <br/>
         <br/>
         <script type="text/javascript">
+            // Standard code to enable pagedown-ace
             var converter1 = Markdown.getSanitizingConverter();
-            
+
             converter1.hooks.chain("preBlockGamut", function (text, rbg) {
                 return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
                     return "<blockquote>" + rbg(inner) + "</blockquote>\n";
                 });
             });
-            
+
             var editor1 = new Markdown.Editor(converter1);
-            
+
             var text1 = document.getElementById('wmd-input').innerHTML;
             var ace1 = ace.edit("wmd-input");
             ace1.setValue(text1, -1);
             editor1.run(ace1);
 
+            // Synchronize scrolling of editor with preview
             var session1 = ace1.getSession();
             var preview = document.getElementById("wmd-preview");
             session1.on("changeScrollTop", function() {
                 preview.scrollTop = session1.getScrollTop();
             });
 
+            // Autosave to web service
             window.setInterval(function() {
                 var xmlhttp;
                 if ( window.XMLHttpRequest ) {
