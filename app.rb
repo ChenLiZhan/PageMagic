@@ -5,6 +5,10 @@ class PageMagicApp < Sinatra::Base
     enable :logging
   end
   get '/' do
+    @content
+    File.open('public/draft/temp.txt', 'r') do |file|
+      @content = file.read
+    end
     erb :home
   end
 
@@ -12,7 +16,7 @@ class PageMagicApp < Sinatra::Base
     content = request.body.read
     logger.info content
     
-    File.open('draft/temp.txt', 'w') do |file|
+    File.open('public/draft/temp.txt', 'w') do |file|
       file.puts content
     end
   end
