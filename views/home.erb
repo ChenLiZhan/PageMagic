@@ -14,37 +14,68 @@
 
     <body>
     <div class="container">
-        <div class="wmd-panel">
-            <div id="wmd-button-bar"></div>
-            <div class="wmd-input" id="wmd-input">
-                <%= @content %>
-            </div>
+        <div>
+            <span class="text-muted">Status:</span>
+            <img id="save-status" src="images/is_save.png" alt="Your document is saved" class="img-circle small-alert" />
         </div>
-        <div id="wmd-preview" class="wmd-panel wmd-preview"></div>
-        <br/>
-        <br/>
+        <div class="row">
+            <div class="col-md-5">
+                <div id="wmd-button-bar"></div>
+                <div class="wmd-input" id="wmd-input"><%= @content %></div>
+            </div>
+            <div id="wmd-preview" class="wmd-preview col-md-5"></div>            
+        </div>
+
         <script type="text/javascript">
             // Standard code to enable pagedown-ace
-            var converter1 = Markdown.getSanitizingConverter();
+            var converter = Markdown.getSanitizingConverter();
 
-            converter1.hooks.chain("preBlockGamut", function (text, rbg) {
+            converter.hooks.chain("preBlockGamut", function (text, rbg) {
                 return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
                     return "<blockquote>" + rbg(inner) + "</blockquote>\n";
                 });
             });
 
-            var editor1 = new Markdown.Editor(converter1);
+            var editor = new Markdown.Editor(converter);
 
-            var text1 = document.getElementById('wmd-input').innerHTML;
+            var text = document.getElementById('wmd-input').innerHTML;
             var ace1 = ace.edit("wmd-input");
-            ace1.setValue(text1, -1);
-            editor1.run(ace1);
+            ace1.setValue(text, -1);
+            editor.run(ace1);
 
             // Synchronize scrolling of editor with preview
-            var session1 = ace1.getSession();
+            var session = ace1.getSession();
             var preview = document.getElementById("wmd-preview");
-            session1.on("changeScrollTop", function() {
-                preview.scrollTop = session1.getScrollTop();
+            session.on("changeScrollTop", function() {
+                preview.scrollTop = session.getScrollTop();
+            });
+
+            // compare if the content is changed
+            var save_icon = document.getElementById("save-status");
+            session.on('change', function(e) {
+                var xmlhttp;
+                if ( window.XMLHttpRequest ) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                var ace1 = ace.edit("wmd-input");
+                var text = ace1.getValue();
+                xmlhttp.onreadystatechange = function() {
+                    if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+                        if ( xmlhttp.responseText == "change") {
+                            save_icon.src = "images/not_save.png";
+                        } else if ( xmlhttp.responseText == "not change" ) {
+                            save_icon.src = "images/is_save.png";
+                        } else {
+                            console.log("Ajax error");
+                        }
+                    }
+                }
+                xmlhttp.open("POST","/api/v1/compare" ,true);
+                xmlhttp.send(text);
             });
 
             // Autosave to web service
@@ -61,6 +92,7 @@
                 var text = ace1.getValue();
                 xmlhttp.open("POST","/api/v1/save" ,true);
                 xmlhttp.send(text);
+                save_icon.src = "images/is_save.png"
             }, 30000);
         </script>
     </div>
