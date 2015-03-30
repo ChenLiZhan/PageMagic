@@ -30,9 +30,6 @@ session.on("changeScrollTop", function() {
 var save_icon = document.getElementById("save-status");
 session.on('change', function(e) {
     var xmlhttp;
-    
-    // run over the page for the math formula again
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 
     if ( window.XMLHttpRequest ) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -42,10 +39,10 @@ session.on('change', function(e) {
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-
     var ace1 = ace.edit("wmd-input");
     var text = ace1.getValue();
     xmlhttp.onreadystatechange = function() {
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub, "wmd-preview"]);
         if ( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
             if ( xmlhttp.responseText == "change") {
                 save_icon.src = "images/not_save.png";
