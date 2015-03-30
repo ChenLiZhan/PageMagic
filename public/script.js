@@ -1,10 +1,15 @@
 // Standard code to enable pagedown-ace
-var converter = Markdown.getSanitizingConverter();
+var converter = new Markdown.Converter();
 
-converter.hooks.chain("preBlockGamut", function (text, rbg) {
-    return text.replace(/^ {0,3}""" *\n((?:.*?\n)+?) {0,3}""" *$/gm, function (whole, inner) {
-        return "<blockquote>" + rbg(inner) + "</blockquote>\n";
-    });
+Markdown.Extra.init(converter, {
+                  extensions: "all"
+                });
+
+converter.hooks.chain("preConversion", function (text) {
+    return text.replace(/\b(a\w*)/gi, "*$1*");
+});
+converter.hooks.chain("plainLinkText", function (url) {
+    return "This is a link to " + url.replace(/^https?:\/\//, "");
 });
 
 var editor = new Markdown.Editor(converter);
@@ -32,6 +37,10 @@ session.on('change', function(e) {
         // code for IE6, IE5
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
+
+    // run over the page for the math formula again
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+
     var ace1 = ace.edit("wmd-input");
     var text = ace1.getValue();
     xmlhttp.onreadystatechange = function() {

@@ -6,12 +6,21 @@
         <title>PageDown Demo Page</title>
         <link rel="stylesheet" type="text/css" href="/style.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+                tex2jax: {
+                  inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                  displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                },
+            });
+        </script>
     </head>
 
     <body>
     <div class="container">
         <div>
-            <span class="text-muted">Status:</span>
+            <span class="text-muted">Saving Status:</span>
             <img id="save-status" src="images/is_save.png" alt="Your document is saved" class="img-circle small-alert" />
         </div>
         <div class="row">
@@ -21,11 +30,13 @@
             </div>
             <div id="wmd-preview" class="wmd-preview col-md-5"></div>            
         </div>
+
     </div>
     </body>
     <script type="text/javascript" src="/Markdown.Converter.js"></script>
     <script type="text/javascript" src="/Markdown.Sanitizer.js"></script>
     <script type="text/javascript" src="/Markdown.Editor.js"></script>
+    <script type="text/javascript" src="/Markdown.Extra.js"></script>
     <script src="/src/ace.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="/script.js"></script>
 </html>

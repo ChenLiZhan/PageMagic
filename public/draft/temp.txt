@@ -1,2 +1,46 @@
-# Content for PageMagic!
-  + Try to edit the content here
+#1.7 The statistical forecasting perspective
+
+The thing we are trying to forecast is unknown (or we wouldn't be
+forecasting it), and so we can think of it as a *random variable*. For
+example, the total sales for next month could take a range of possible
+values, and until we add up the actual sales at the end of the month we don't
+know what the value will be. So, until we know the sales for next month,
+it is a random quantity. 
+
+Because next month is relatively close, we
+usually have a good idea what the likely sales values could be. On the
+other hand, if we are forecasting the sales for the same month next
+year, the possible values it could take are much more variable. In most
+forecasting situations, the variation associated with the thing we are
+forecasting will shrink as the event approaches. In other words, the
+further ahead we forecast, the more uncertain we are. 
+
+When we obtain a forecast, we are estimating the *middle* of the range of possible values
+the random variable could take. Very often, a forecast is accompanied by
+a prediction interval giving a *range* of values the random variable
+could take with relatively high probability. For example, a 95%
+prediction interval contains a range of values which should include the
+actual future value with probability 95%. 
+
+A forecast is always based on some observations. Suppose we denote all the information we have
+observed as ${\cal I}$ and we want to forecast $y_i$. We then
+write $y_{i} |{\cal I}$ meaning "the random variable $y_{i}$
+given what we know in ${\cal I}$". The set  of values that this random variable
+could take, along with their relative probabilities, is known as the "probability distribution" of $y_{i} |{\cal I}$. In forecasting,
+we call this the "forecast distribution". When we talk about the "forecast", we usually mean the average value of the forecast
+distribution, and we put a "hat" over $y$ to show this. Thus, we
+write the forecast of $y_i$ as $\hat{y}\_i$, meaning the average of
+the possible values that $y_i$ could take given everything we know.
+Occasionally, we will use $\hat{y}\_i$ to refer to the *median* (or
+middle value) of the forecast distribution instead. 
+
+<div>
+With time series forecasting, it is often useful to specify exactly what information we
+have used in calculating the forecast. Then we will write, for example,
+$\hat{y}_{t|t-1}$ to mean the forecast of $y_t$ taking account of
+all previous observations $(y_1,\dots,y_{t-1})$. Similarly,
+$\hat{y}_{T+h|T}$ means the forecast of $y_{T+h}$ taking account
+of $y_1,\dots,y_T$ (i.e., an $h$-step forecast taking account of
+all observations up to time $T$).
+</div>
+
