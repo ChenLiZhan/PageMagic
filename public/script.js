@@ -5,13 +5,6 @@ Markdown.Extra.init(converter, {
                   extensions: "all"
                 });
 
-converter.hooks.chain("preConversion", function (text) {
-    return text.replace(/\b(a\w*)/gi, "*$1*");
-});
-converter.hooks.chain("plainLinkText", function (url) {
-    return "This is a link to " + url.replace(/^https?:\/\//, "");
-});
-
 var editor = new Markdown.Editor(converter);
 
 var text = document.getElementById('wmd-input').innerHTML;

@@ -210,5 +210,5 @@ number of observations in a time series. When we are making general
 comments that could be applicable to either cross-sectional or time series
 data, we will tend to use $i$ and $N$.
 
+$N$
 
-----------
