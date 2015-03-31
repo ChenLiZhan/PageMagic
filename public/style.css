@@ -10,23 +10,23 @@ blockquote {
 	background: #d0f0ff;
 }
 
-.wmd-panel
+/*.wmd-panel
 {
   float: left;
 	width: 30%;
-	min-width: 500px;
-}
+	min-width: 100%;
+}*/
 
 .wmd-button-bar 
 {
-	width: 100%;
+	/*width: 100%;*/
 	background-color: Silver; 
 }
 
 .wmd-input 
 { 
-	height: 300px;
-	width: 100%;
+	height: 600px;
+	/*width: 100%;*/
 	background-color: Gainsboro;
 	border: 1px solid DarkGray;
 }
@@ -34,10 +34,10 @@ blockquote {
 .wmd-preview 
 { 
   overflow: scroll;
-  margin-left: 10px;
+  /*margin-left: 10px;*/
   margin-top: 20px;
-  width: 50%;
-  height: 300px;
+  /*width: 50%;*/
+  height: 600px;
 }
 
 .wmd-button-row 
