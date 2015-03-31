@@ -79,7 +79,7 @@ footprint.
 
 Cross-sectional models are used when the variable to be
 forecast exhibits a relationship with one or more other predictor
-variables. The purpose of the cross-sectional model is to describe the
+variables.&nbsp;The purpose of the cross-sectional model is to describe the
 form of the relationship and use it to forecast values of the forecast
 variable that have not been observed. Under this model, any change in
 predictors will affect the output of the system in a predictable way,
@@ -116,7 +116,7 @@ When forecasting time series data, the aim is to estimate how the sequence of ob
 into the future. The following figure shows the quarterly Australian beer
 production from 1992 to the third quarter of 2008. 
 
-[caption id="attachment_367" align="aligncenter" width="570" caption="Figure 1.1: Australian quarterly beer production: 1992Q1--2008Q3, with two years of forecasts."]<img class="size-full wp-image-318" src="http://www.otexts.org/sites/default/files/fpp/images/beerf2.png" alt="" width="570" />[/caption]
+[caption id="attachment_367" align="aligncenter" width="570" caption="Figure 1.1: Australian quarterly beer production: 1992Q1--2008Q3, with two years of forecasts."]<img class="size-full wp-image-318" src="http://www.otexts.org/sites/default/files/fpp/images/beerf2.png" alt="" width="570">[/caption]
 
 The blue lines show forecasts for the next two years. Notice how the
 forecasts have captured the seasonal pattern seen in the historical data
@@ -147,7 +147,7 @@ example, suppose we wish to forecast the hourly electricity demand (ED)
 of a hot region during the summer period. A model with predictor
 variables might be of the form 
 
-\begin{align\*} \text{ED} = & f(\text{current temperature, strength of economy, population,}\\\\ &
+\begin{align\*} \text{ED} = &amp; f(\text{current temperature, strength of economy, population,}\\\\ &amp;
 \qquad \text{time of day, day of week, error}). \end{align\*} 
 
 The relationship is not exact---there will always be changes in electricity
