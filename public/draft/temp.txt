@@ -9,3 +9,6 @@ $$ \text{ED}_{t+1} = f(\text{ED}_{t}, \text{ED}_{t-1}, \text{ED}_{t-2}, \text{ED
 $$ \text{ED}_{t+1} = f(\text{ED}, \text{ED}, \text{ED}, \text{ED},\dots, \text{error}) $$
 
 
+
+$$ \text{ED}{t+1} = f(\text{ED}{t}, \text{ED}{t-1}, \text{ED}{t-2}, \text{ED}_{t-3},\dots, \text{error}) $$
+
