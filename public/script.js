@@ -32,7 +32,6 @@ session.on('change', function(e) {
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
 
-    var ace1 = ace.edit("wmd-input");
     var text = ace1.getValue();
     xmlhttp.onreadystatechange = function() {
         MathJax.Hub.Queue(["Typeset", MathJax.Hub, "wmd-preview"]);
